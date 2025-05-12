@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+## Chào mừng các bạn đến với dự án xây dựng một trang web E-commerce phục vụ cho môn học Thương mại điện tử
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tại đây sẽ có một số lưu ý khi làm project xin mọi người đọc và làm theo để trách khỏi những sự cãi vã không mong muốn trong nhóm
 
-## Available Scripts
+## Một lần nữa xin cảm ơn mọi người đã làm là thành viên của nhóm
 
-In the project directory, you can run:
+## Đặt tên nhánh
+Khi tiến hành dev mọi người cần chọn chức năng của riêng mình để dev
+Quy tắc đặt tên như sau
+Nếu là tính năng mới : feature/tên-chức-năng
+Nếu fix một tính năng nào đó: fix/tên-chức-năng
+Nếu là fix lỗi trực tiếp ở nhánh main: hotfix/tên-chức-năng-bị-lỗi
 
-### `npm start`
+## Đặt tên các phần trong src
+    Nếu là một folder thì đặt tên theo lowercase + kebab-case: 
+        VD: login, forgot-password,...
+    Nếu là một component thì đặt tên theo kiểu PascalCase: 
+        VD: Account, CreateAccount,...
+    Nếu là một method thì đặt tên theo kiểu camelCase:
+        VD: changePassword, login,...
+    ...
+## Nếu add thêm thư viện or update phiên bản vui lòng nhắn lên nhóm
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Nên sử dụng những component có sẵn của MUI và tự dev trc đó nếu không có hãy tiến hành custom
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Khi hoàn thành nhánh tiến hành merge code thì nhớ pull code ở main về rồi check conflict rồi mới tạo merge request tiến hành merge nhé
 
-### `npm test`
+## Khi merge sẽ có một nút delete branch mọi người tắt nút đó trước khi merge nhé, hoàn thành đâu đó rồi hãy xóa
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Nếu còn gì thêm mình sẽ ghi tiếp trong này
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Cảm ơn mọi người!!
