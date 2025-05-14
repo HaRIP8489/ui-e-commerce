@@ -29,11 +29,12 @@ const ForgotPassword: React.FC = () => {
           {error && <p style={styles.error}>{error}</p>}
           <button type="submit" style={styles.button}>Gửi yêu cầu</button>
         </form>
-        <p style={styles.link as React.CSSProperties}><Link to="/login">← Quay lại đăng nhập</Link></p>
+        <p style={styles.link}><Link to="/login">← Quay lại đăng nhập</Link></p>
       </div>
     </div>
   );
 };
+//
 
 const styles = {    
     container: {
@@ -70,7 +71,7 @@ const styles = {
         color: 'red',
     },
     link: {
-        textAlign: 'center',
+        textAlign: 'center' as 'center',
     },
     };
 

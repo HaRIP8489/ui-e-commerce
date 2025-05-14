@@ -73,7 +73,7 @@ const styles = {
     marginBottom: '10px',
     borderRadius: '4px',
     border: '1px solid #ccc',
-  },
+  },//
   button: {
     width: '100%',
     padding: '10px',
