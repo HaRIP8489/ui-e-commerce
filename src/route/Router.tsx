@@ -12,11 +12,10 @@ const CartPage = lazy(() => import("../pages/CartPage"))
 
 const AppRouter = () => {
     return (
-        // eslint-disable-next-line react/react-in-jsx-scope
         <BrowserRouter>
             <Suspense>
                 <Routes>
-                    <Route index path="/" element={<Home />} />
+                    <Route index path="/home" element={<Home />} />
                     <Route path="/cart" element={<CartPage/>} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
