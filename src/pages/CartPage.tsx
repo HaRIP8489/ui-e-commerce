@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid, TextField, Button, List, ListItem, ListItemText, Divider } from '@mui/material';
+import { Box, Typography, Grid, TextField, Button, List, ListItem, ListItemText } from '@mui/material';
 import CartItem from '../components/CartItem';
 import CartSummary from '../components/CartSummary';
 
@@ -111,7 +111,7 @@ const CartPage: React.FC = () => {
                 <ListItem key={index} sx={{ py: 0, alignItems: 'flex-start' }}>
                   <ListItemText
                     primary={line}
-                    primaryTypographyProps={{ fontSize: 14, color: 'text.secondary', lineHeight: 1.4 }}
+                    primaryTypographyProps={{ fontSize: 16, color: 'text.secondary', lineHeight: 1.4 }}
                     sx={{ '&::before': { content: '"→ "', color: 'text.primary' } }}
                   />
                 </ListItem>

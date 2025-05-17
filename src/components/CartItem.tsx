@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import QuantityControl from './QuantityControl';
 
 interface CartItemProps {
   item: {
@@ -11,12 +12,16 @@ interface CartItemProps {
 }
 
 const CartItem: React.FC<{ item: CartItemProps['item'] }> = ({ item }) => {
+  const [quantity, setQuantity] = useState(item.quantity);
+
   const handleIncrease = () => {
-    console.log('Tăng số lượng:', item.id);
+    setQuantity(prev => prev + 1);
   };
 
   const handleDecrease = () => {
-    console.log('Giảm số lượng:', item.id);
+    if (quantity > 1) {
+      setQuantity(prev => prev - 1);
+    }
   };
 
   const handleRemove = () => {
@@ -33,18 +38,22 @@ const CartItem: React.FC<{ item: CartItemProps['item'] }> = ({ item }) => {
       />
 
       <div className="flex-1">
-        <div className="font-semibold text-lg">{item.name}</div>
-        <div className="text-gray-600">{item.price.toLocaleString('vi-VN')} đ/ngày</div>
+        <div className="font-semibold text-3xl">{item.name}</div>
+        <div className="text-gray-600 text-3xl">
+          {item.price.toLocaleString('vi-VN')} đ/ngày
+        </div>
 
         <div className="flex items-center mt-2 gap-2">
-          <button onClick={handleDecrease} className="px-2 border rounded">-</button>
-          <span>{item.quantity}</span>
-          <button onClick={handleIncrease} className="px-2 border rounded">+</button>
+          <QuantityControl
+            quantity={quantity}
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+          />
         </div>
       </div>
 
       <div className="text-right">
-        <button onClick={handleRemove} className="text-red-500 text-lg">✖</button>
+        <button onClick={handleRemove} className="absolute top-4 right-4 text-red-500 text-3xl font-normal">x</button>
       </div>
     </div>
   );
