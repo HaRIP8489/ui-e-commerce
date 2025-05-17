@@ -1,41 +1,67 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from '../components/Header';
+import '../assets/LoginForm.css';
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!email) {
-      setError('Vui lòng nhập email');
-    } else {
-      setError('');
-      alert('📧 Đã gửi email đặt lại mật khẩu (mock)');
+      setMessage('Vui lòng nhập gmail đã đăng ký');
+      return;
     }
+
+    setMessage('✅ Yêu cầu đã được gửi. Vui lòng kiểm tra hộp thư đến!');
+    // Giả lập gửi email
+    setTimeout(() => setEmail(''), 2000);
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="card shadow p-4" style={{ width: '100%', maxWidth: 400 }}>
-        <h3 className="text-center mb-4">Quên mật khẩu</h3>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Nhập email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          {error && <div className="alert alert-danger py-2">{error}</div>}
-          <button type="submit" className="btn btn-primary w-100">Gửi yêu cầu</button>
-        </form>
-        <div className="text-center mt-3">
-          <Link to="/login" className="text-decoration-none">← Quay lại đăng nhập</Link>
+    <div>
+      <Header />
+      <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+        <div className="login-box text-center p-4 rounded border">
+          <h2 className="fw-bold mb-2">Quên mật khẩu</h2>
+          <hr className="underline" />
+
+          <p className="text-muted small mb-3">
+            Nhập gmail đã đăng ký, mật khẩu mới sẽ gửi vào gmail của bạn trong giây lát
+          </p>
+
+          <form onSubmit={handleSubmit} className="text-start mt-3">
+            <div className="mb-3">
+              <label className="form-label fw-bold">Gmail:</label>
+              <div className="input-group">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="abc@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <span className="input-group-text">
+                  <i className="bi bi-envelope-fill"></i>
+                </span>
+              </div>
+            </div>
+
+            {message && <p className="text-success text-center small">{message}</p>}
+
+            <button type="submit" className="btn btn-success w-100 fw-bold py-2">
+              Gửi yêu cầu
+            </button>
+
+            <div className="mt-4 d-flex justify-content-between small">
+              <span className="text-muted">Đã có tài khoản?</span>
+              <Link to="/login" className="text-danger fw-bold">
+                Đăng nhập tại đây.
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -43,3 +69,4 @@ const ForgotPassword: React.FC = () => {
 };
 
 export default ForgotPassword;
+

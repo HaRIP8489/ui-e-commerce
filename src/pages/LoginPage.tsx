@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from '../components/Header';
+import '../assets/LoginForm.css';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -11,74 +12,113 @@ const Login: React.FC = () => {
     e.preventDefault();
     if (email === 'admin@camerarent.com' && password === '123456') {
       alert('🎉 Đăng nhập thành công!');
-      setError('');
     } else {
-      setError('❌ Sai email hoặc mật khẩu');
+      setError('Sai email hoặc mật khẩu');
     }
   };
 
   return (
-    <div style={styles.bg}>
-      <div style={styles.overlay}>
-        <div className="card p-4 shadow" style={{ width: '100%', maxWidth: 400 }}>
-          <h3 className="text-center mb-4">🎥 CameraRent</h3>
-          <form onSubmit={handleLogin}>
+    <div>
+      <Header />
+      <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+        <div className="login-box text-center p-4 rounded border">
+          <h2 className="fw-bold mb-2">Đăng nhập</h2>
+          <hr className="underline" />
+
+          <form onSubmit={handleLogin} className="text-start mt-4">
             <div className="mb-3">
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-              />
+              <label className="form-label fw-bold">Gmail:</label>
+              <div className="input-group">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="abc@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <span className="input-group-text">
+                  <i className="bi bi-envelope-fill"></i>
+                </span>
+              </div>
             </div>
-            <div className="mb-3">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Mật khẩu"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-              />
+
+            <div className="mb-2">
+              <label className="form-label fw-bold">Mật khẩu:</label>
+              <div className="input-group">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="***********"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span className="input-group-text">
+                  <i className="bi bi-lock-fill"></i>
+                </span>
+              </div>
             </div>
-            {error && <div className="alert alert-danger py-2">{error}</div>}
-            <button type="submit" className="btn btn-primary w-100">
+
+            <div className="text-end mb-3">
+              <Link to="/forgot-password" className="text-danger" style={{ fontSize: 13 }}>
+                Quên mật khẩu.
+              </Link>
+            </div>
+
+            {error && <p className="text-danger text-center small">{error}</p>}
+
+            <button type="submit" className="btn btn-success w-100 fw-bold py-2">
               Đăng nhập
             </button>
+
+            <div className="mt-4 d-flex justify-content-between small">
+              <Link to="/register" className="text-primary">
+                Chưa có tài khoản ?
+              </Link>
+              <Link to="/register" className="text-danger">
+                Đăng ký tại đây.
+              </Link>
+            </div>
           </form>
-          <div className="d-flex justify-content-between mt-3">
-            <Link to="/forgot-password" className="text-decoration-none">
-              Quên mật khẩu?
-            </Link>
-            <Link to="/register" className="text-decoration-none">
-              Chưa có tài khoản?
-            </Link>
-          </div>
         </div>
       </div>
+
+      <footer className="bg-light pt-5 pb-3 mt-5 border-top">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-3 mb-3">
+              <h5 className="fw-bold">EagleCam</h5>
+              <p>Giải pháp thuê máy ảnh tiện lợi và nhanh chóng cho mọi nhiếp ảnh gia.</p>
+            </div>
+            <div className="col-md-3 mb-3">
+              <h6 className="fw-bold">Dịch vụ</h6>
+              <ul className="list-unstyled">
+                <li><a href="#" className="text-decoration-none text-dark">Thuê máy ảnh</a></li>
+                <li><a href="#" className="text-decoration-none text-dark">Phụ kiện</a></li>
+                <li><a href="#" className="text-decoration-none text-dark">Combo khuyến mãi</a></li>
+              </ul>
+            </div>
+            <div className="col-md-3 mb-3">
+              <h6 className="fw-bold">Hỗ trợ</h6>
+              <ul className="list-unstyled">
+                <li><a href="#" className="text-decoration-none text-dark">Câu hỏi thường gặp</a></li>
+                <li><a href="#" className="text-decoration-none text-dark">Hướng dẫn sử dụng</a></li>
+                <li><a href="#" className="text-decoration-none text-dark">Chính sách bảo mật</a></li>
+              </ul>
+            </div>
+            <div className="col-md-3 mb-3">
+              <h6 className="fw-bold">Liên hệ</h6>
+              <p>Email: support@eaglecam.vn</p>
+              <p>Hotline: 1900 123 456</p>
+              <p>Địa chỉ: 123 Nguyễn Văn Cừ, TP.HCM</p>
+            </div>
+          </div>
+          <div className="text-center mt-4 text-muted">
+            &copy; {new Date().getFullYear()} EagleCam. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
-};
-
-const backgroundImage = "url('https://images.unsplash.com/photo-1508779018996-3a9a53a74d87?auto=format&fit=crop&w=1950&q=80')";
-
-const styles: { [key: string]: React.CSSProperties } = {
-  bg: {
-    backgroundImage,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '100vh',
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '1rem',
-  },
 };
 
 export default Login;
