@@ -1,4 +1,5 @@
 import React from 'react';
+import { Paper, Typography, Box } from '@mui/material';
 
 interface CartSummaryProps {
   cartItems: {
@@ -14,22 +15,32 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="cart-summary border p-4 rounded shadow-md w-full max-w-md">
-      <h3 className="text-xl font-bold mb-4">Thông tin đơn hàng</h3>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 3,
+        borderRadius: 2,
+        width: '100%',
+        maxWidth: 400,
+      }}
+    >
+      <Typography variant="h6" fontWeight="bold" gutterBottom>
+        Thông tin đơn hàng
+      </Typography>
 
-      <div className="flex justify-between mb-4">
-        <span>Tổng tiền:</span>
-        <span className="font-bold text-red-600">{totalPrice.toLocaleString('vi-VN')} vnđ</span>
-      </div>
+      <Box display="flex" justifyContent="space-between" mb={2}>
+        <Typography variant="body1">Tổng tiền:</Typography>
+        <Typography variant="body1" fontWeight="bold" color="error">
+          {totalPrice.toLocaleString('vi-VN')} vnđ
+        </Typography>
+      </Box>
 
-      <div className="text-sm text-gray-600 mb-4">
+      <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
         Phí vận chuyển sẽ được tính ở trang thanh toán.
         <br />
         Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.
-      </div>
-
-
-    </div>
+      </Typography>
+    </Paper>
   );
 };
 

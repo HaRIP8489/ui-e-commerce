@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import QuantityControl from './QuantityControl';
+import { Box, Typography, IconButton, Avatar } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface CartItemProps {
   item: {
@@ -29,33 +31,45 @@ const CartItem: React.FC<{ item: CartItemProps['item'] }> = ({ item }) => {
   };
 
   return (
-    <div className="cart-item flex items-start gap-4 py-4 border-b">
-      <img
+    <Box
+      display="flex"
+      gap={2}
+      py={2}
+      borderBottom="1px solid #ccc"
+      position="relative"
+    >
+      <Avatar
         src={item.image}
         alt={item.name}
-        className="w-24 h-24 object-cover rounded"
-        style={{ maxWidth: '96px', maxHeight: '96px', objectFit: 'cover' }}
+        variant="rounded"
+        sx={{ width: 96, height: 96 }}
       />
 
-      <div className="flex-1">
-        <div className="font-semibold text-3xl">{item.name}</div>
-        <div className="text-gray-600 text-3xl">
+      <Box flex={1}>
+        <Typography variant="h6" sx={{ fontSize: '1.25rem', fontWeight: 600 }}>
+          {item.name}
+        </Typography>
+        <Typography color="text.secondary" sx={{ fontSize: '1.25rem' }}>
           {item.price.toLocaleString('vi-VN')} đ/ngày
-        </div>
+        </Typography>
 
-        <div className="flex items-center mt-2 gap-2">
+        <Box display="flex" alignItems="center" mt={1} gap={1}>
           <QuantityControl
             quantity={quantity}
             onIncrease={handleIncrease}
             onDecrease={handleDecrease}
           />
-        </div>
-      </div>
+        </Box>
+      </Box>
 
-      <div className="text-right">
-        <button onClick={handleRemove} className="absolute top-4 right-4 text-red-500 text-3xl font-normal">x</button>
-      </div>
-    </div>
+      <IconButton
+        onClick={handleRemove}
+        sx={{ position: 'absolute', top: 8, right: 8 }}
+        color="error"
+      >
+        <CloseIcon sx={{ fontSize: '1.8rem' }} />
+      </IconButton>
+    </Box>
   );
 };
 
