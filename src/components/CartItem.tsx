@@ -25,7 +25,12 @@ const CartItem: React.FC<{ item: CartItemProps['item'] }> = ({ item }) => {
 
   return (
     <div className="cart-item flex items-start gap-4 py-4 border-b">
-      <img src={item.image} alt={item.name} className="w-24 h-24 object-cover" />
+      <img
+        src={item.image}
+        alt={item.name}
+        className="w-24 h-24 object-cover rounded"
+        style={{ maxWidth: '96px', maxHeight: '96px', objectFit: 'cover' }}
+      />
 
       <div className="flex-1">
         <div className="font-semibold text-lg">{item.name}</div>

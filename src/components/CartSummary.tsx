@@ -28,10 +28,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
         Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.
       </div>
 
-      <button className="w-full bg-red-600 text-white py-2 rounded mb-2">Thanh toán</button>
-      <div className="text-center">
-        <a href="/" className="text-blue-600 underline">← Tiếp tục mua hàng</a>
-      </div>
+
     </div>
   );
 };
