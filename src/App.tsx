@@ -1,9 +1,10 @@
 import React from 'react';
-import CartPage from './pages/CartPage';
+import AppRouter from "./route/Router";
 
-
-const App: React.FC = () => {
-  return <CartPage />;
-};
+function App() {
+    return (
+        <AppRouter />
+    );
+}
 
 export default App;
