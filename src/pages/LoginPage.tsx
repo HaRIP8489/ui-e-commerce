@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import '../assets/LoginForm.css';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +23,6 @@ const Login: React.FC = () => {
         <div className="login-box text-center p-4 rounded border">
           <h2 className="fw-bold mb-2">Đăng nhập</h2>
           <hr className="underline" />
-
           <form onSubmit={handleLogin} className="text-start mt-4">
             <div className="mb-3">
               <label className="form-label fw-bold">Gmail:</label>
@@ -41,7 +39,6 @@ const Login: React.FC = () => {
                 </span>
               </div>
             </div>
-
             <div className="mb-2">
               <label className="form-label fw-bold">Mật khẩu:</label>
               <div className="input-group">

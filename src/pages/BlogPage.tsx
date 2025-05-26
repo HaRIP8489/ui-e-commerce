@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import cam2 from "../assets/images/cam2.jpg"
+import {Box, Button} from "@mui/material";
 
 const blogPosts = [
   {
@@ -9,7 +11,7 @@ const blogPosts = [
     date: '15/05/2025',
     author: 'EagleCam Team',
     excerpt: 'Khám phá các mẹo đơn giản nhưng hiệu quả giúp bạn cải thiện kỹ năng chụp ảnh một cách nhanh chóng.',
-    image: 'https://source.unsplash.com/400x250/?camera,photography'
+    image: cam2
   },
   {
     id: 2,
@@ -17,7 +19,7 @@ const blogPosts = [
     date: '10/05/2025',
     author: 'EagleCam Reviewer',
     excerpt: 'Cùng đánh giá chi tiết hai mẫu máy ảnh nổi bật nhất trong phân khúc bán chuyên hiện nay.',
-    image: 'https://source.unsplash.com/400x250/?sony,canon,camera'
+    image: cam2
   },
   {
     id: 3,
@@ -25,13 +27,13 @@ const blogPosts = [
     date: '05/05/2025',
     author: 'Nhiếp ảnh gia Linh',
     excerpt: 'Gợi ý những ống kính chụp chân dung tốt nhất dành cho nhu cầu cá nhân hoặc thương mại.',
-    image: 'https://source.unsplash.com/400x250/?lens,portrait'
+    image: cam2
   }
 ];
 
 const BlogPage: React.FC = () => {
   return (
-    <div>
+    <Box sx={{ px: 5, py: 3, backgroundColor: '#D0D5DD' }}>
       <Header />
       <div className="container py-5">
         <h1 className="text-center fw-bold mb-4">Tin Tức & Blog</h1>
@@ -48,7 +50,10 @@ const BlogPage: React.FC = () => {
                   <p className="card-text">{post.excerpt}</p>
                 </div>
                 <div className="card-footer bg-transparent border-top-0">
-                  <a href="#" className="btn btn-outline-primary w-100">Đọc thêm</a>
+                  <Button variant="contained" size="large" fullWidth
+                          sx={{  mt: 1,  color: "white", backgroundColor: "black", "&:hover": { backgroundColor: "#0070f3" } }}>
+                    Gửi tin nhắn
+                  </Button>
                 </div>
               </div>
             </div>
@@ -57,7 +62,7 @@ const BlogPage: React.FC = () => {
       </div>
 
        <Footer /> 
-    </div>
+    </Box>
   );
 };
 
