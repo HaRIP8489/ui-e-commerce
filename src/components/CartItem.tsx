@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import QuantityControl from './QuantityControl';
+import SelectQuantity from '../common/SelectQuantity';
 import { Box, Typography, IconButton, Avatar } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface CartItemProps {
   item: {
@@ -11,9 +11,10 @@ interface CartItemProps {
     quantity: number;
     image: string;
   };
+  onDelete?: (id: number) => void;
 }
 
-const CartItem: React.FC<{ item: CartItemProps['item'] }> = ({ item }) => {
+const CartItem: React.FC<CartItemProps> = ({ item, onDelete }) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const handleIncrease = () => {
@@ -54,20 +55,15 @@ const CartItem: React.FC<{ item: CartItemProps['item'] }> = ({ item }) => {
         </Typography>
 
         <Box display="flex" alignItems="center" mt={1} gap={1}>
-          <QuantityControl
-            quantity={quantity}
-            onIncrease={handleIncrease}
-            onDecrease={handleDecrease}
-          />
+          <SelectQuantity quantity={quantity} onChange={setQuantity}/>
         </Box>
       </Box>
 
       <IconButton
-        onClick={handleRemove}
-        sx={{ position: 'absolute', top: 8, right: 8 }}
-        color="error"
+          sx={{ color: 'black', '&:hover': { color: 'error.main' } }}
+          onClick={() => onDelete?.(item.id)}
       >
-        <CloseIcon sx={{ fontSize: '1.8rem' }} />
+        <DeleteIcon />
       </IconButton>
     </Box>
   );

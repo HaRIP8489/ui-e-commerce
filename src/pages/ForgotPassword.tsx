@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import '../assets/LoginForm.css';
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
