@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import '../assets/LoginForm.css';
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState('');

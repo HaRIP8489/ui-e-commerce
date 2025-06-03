@@ -1,163 +1,153 @@
 import React, {useRef, useState} from 'react';
 import Header from "../components/Header"
 import camera from  "../assets/images/Camera.png";
-import lo from  "../assets/images/location.svg";
-import shake from  "../assets/images/handshake.svg";
-import cam from  "../assets/images/camera.svg";
 import cam1 from  "../assets/images/cam1.jpg";
-import cam2 from  "../assets/images/cam2.jpg";
-import cam3 from  "../assets/images/cam3.jpg";
-import {Link, useNavigate} from "react-router-dom";
+import {Box, Button, TextField, Typography} from '@mui/material';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CardCategories    from "../common/CardCategories";
+import Canon from "../assets/images/canon.webp";
+import Nikon from "../assets/images/nikon.png";
+import Sony from "../assets/images/sony.png";
+import Fujifilm from "../assets/images/fujifilm.jpg";
+import Panasonic from "../assets/images/panasonic.jpg";
+import Olympus from "../assets/images/olympus.jpg";
+import Leica from "../assets/images/leica.png";
+import PhaseOne from "../assets/images/phaseone.jpg";
+import Footer from "../components/Footer";
+import CardProduct from "../common/CardProduct";
+
+const categories1 = [
+    { image: Canon, title: "Canon", url: "Canon" },
+    { image: Nikon, title: "Nikon", url: "Nikon" },
+    { image: Sony, title: " Sony", url: " Sony" },
+    { image: Fujifilm, title: "Fujifilm", url: "Fujifilm" },
+]
+
+const categories2 = [
+    { image: Panasonic, title: "Panasonic", url: "Panasonic" },
+    { image: Olympus, title: "Olympus", url: "Olympus" },
+    { image: Leica, title: "Leica", url: "Leica" },
+    { image: PhaseOne, title: "PhaseOne", url: "PhaseOne" },
+]
+
+const product = { image: cam1, title: "X-S20", price: "1.500.000", discount: "10%", priceDiscount: "1.350.000", quantitySold: "107" }
 
 const HomePage: React.FC = () => {
-    const [show, setShow] = useState(false);
-    const toggleMenu = (e: React.MouseEvent) => {
-        e.preventDefault(); // nếu dùng <a> thay vì <button>
-        setShow((prev) => !prev);
-    };
-    const closeMenu = () => setShow(false);
-    const navigate = useNavigate();
-
     return (
-        <div>
+        <Box sx={{ px: 5, py: 3, backgroundColor: '#D0D5DD' }}>
             {/* Header */}
-            <Header />
+            <Box className="shadow rounded-3">
+                <Header />
+            </Box>
             {/* Banner */}
-            <div>
-                <img
-                    src={camera}
-                    alt="Banner"
-                    className="img-fluid w-100"
-                    style={{ height: '500px', objectFit: 'cover' }}
-                />
-                <div className="position-absolute w-100 h-100 d-flex align-items-center" style={{top: '200px', left: '7px', width: '200px', height: '100px'}}>
-                    <div className="container d-flex">
-                        <div className="bg-primary text-white p-4 rounded me-4" style={{ width: '300px' }}>
-                            <h5 className="fw-bold">Ghi lại khoảnh khắc của bạn</h5>
-                            <input type="text" className="form-control my-2" placeholder="Nơi nhận máy ảnh" />
-                            <input type="date" className="form-control my-2" placeholder="Ngày bắt đầu" />
-                            <input type="date" className="form-control my-2" placeholder="Ngày kết thúc" />
-                            <input type="text" className="form-control my-2" placeholder="Họ tên đầy đủ" />
-                            <button className="btn btn-success w-100 mt-2 ">Thuê máy ảnh ngay</button>
-                        </div>
-                        <div className="bg-white p-4 rounded shadow flex-grow-1">
-                            <h5 className="fw-bold mb-3">Better Way to Rent Your Perfect Camera</h5>
-                            <div className="row text-center">
-                                <div className="col">
-                                    <p>Chọn cửa hàng nhận máy</p>
-                                    <img src={lo} alt="Logo" width="30" height="30" className="d-inline-block align-top" />
+            <Box className="m-3 ">
+                <Box component="img" src={camera} alt="Banner" sx={{width: '100%', height: '500px', objectFit: 'cover', display: 'block',}}/>
+            </Box>
+            {/*register form*/}
+            <Box sx={{ maxWidth: '66.6666%', mx: 'auto', display: 'flex' }}>
+                {/*leftform*/}
+                <Box sx={{ width: '37.5%', bgcolor: '#0070f3', borderRadius: 2 }}>
+                    <Typography color="white" align="center" variant="h5" fontWeight="bold" sx={{ p: 2 }} >Ghi lại khoảnh khắc của bạn</Typography>
+                    <Box sx={{ px: 2, pb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <TextField fullWidth variant="outlined" label="Nơi nhận máy ảnh" placeholder="Cơ sở" InputLabelProps={{ shrink: true }}
+                                   sx={{'& .MuiInputLabel-root': {color: 'white',}, '& .MuiInputLabel-root.Mui-focused': {color: 'white',}, '& .MuiOutlinedInput-root': {'& fieldset': {borderColor: 'white',}, '&:hover fieldset': {borderColor: 'white',}, '&.Mui-focused fieldset': {borderColor: 'white',},}, input: {color: 'white',},}}/>
+                        <TextField fullWidth variant="outlined" label="Nơi trả máy ảnh" placeholder="Cơ sở" InputLabelProps={{ shrink: true }}
+                                   sx={{'& .MuiInputLabel-root': {color: 'white',}, '& .MuiInputLabel-root.Mui-focused': {color: 'white',}, '& .MuiOutlinedInput-root': {'& fieldset': {borderColor: 'white',}, '&:hover fieldset': {borderColor: 'white',}, '&.Mui-focused fieldset': {borderColor: 'white',},}, input: {color: 'white',},}}/>
+                        <Box sx={{ display: 'flex', gap: 2 }}>
+                            <TextField fullWidth variant="outlined" label="Ngày thuê" placeholder="Ngày" InputLabelProps={{ shrink: true }}
+                                       sx={{'& .MuiInputLabel-root': {color: 'white',}, '& .MuiInputLabel-root.Mui-focused': {color: 'white',}, '& .MuiOutlinedInput-root': {'& fieldset': {borderColor: 'white',}, '&:hover fieldset': {borderColor: 'white',}, '&.Mui-focused fieldset': {borderColor: 'white',},}, input: {color: 'white',},}}/>
+                            <TextField fullWidth variant="outlined" label="Ngày trả" placeholder="Ngày" InputLabelProps={{ shrink: true }}
+                                       sx={{'& .MuiInputLabel-root': {color: 'white',}, '& .MuiInputLabel-root.Mui-focused': {color: 'white',}, '& .MuiOutlinedInput-root': {'& fieldset': {borderColor: 'white',}, '&:hover fieldset': {borderColor: 'white',}, '&.Mui-focused fieldset': {borderColor: 'white',},}, input: {color: 'white',},}}/>
+                        </Box>
+                        <TextField fullWidth variant="outlined" label="Thời gian nhận hàng" placeholder="Thời gian" InputLabelProps={{ shrink: true }}
+                                   sx={{'& .MuiInputLabel-root': {color: 'white',}, '& .MuiInputLabel-root.Mui-focused': {color: 'white',}, '& .MuiOutlinedInput-root': {'& fieldset': {borderColor: 'white',}, '&:hover fieldset': {borderColor: 'white',}, '&.Mui-focused fieldset': {borderColor: 'white',},}, input: {color: 'white',},}}/>
+                        <Button variant="contained" size="large" fullWidth
+                                sx={{ mb: 2,  color: "#0070f3", backgroundColor: "white", "&:hover": { color: "white", backgroundColor: "black" } }}>
+                            Thuê máy ảnh ngay
+                        </Button>
+                    </Box>
+                </Box>
+                {/*rightform*/}
+                <Box sx={{ width: '62.5%', bgcolor: 'white', borderRadius: 2, my: 5 }}>
+                    <Box sx={{py:3, px:3, height: '100%'}} className=" d-flex flex-column justify-content-between">
+                        {/*element1*/}
+                        <Typography color="black" variant="h4" fontWeight="bold">
+                            Cách thuê máy ảnh tốt nhất
+                        </Typography>
+                        {/*element2*/}
+                        <Box className="d-flex justify-content-between ">
+                            <Box className="d-flex flex-column align-items-center">
+                                <LocationOnIcon fontSize="inherit" sx={{ color: '#0070f3', fontSize: 80 }} />
+                                <Typography fontWeight="bold" align="center">
+                                    Chọn của hàng<br />nhận máy
+                                </Typography>
+                            </Box>
+                            <Box className="d-flex flex-column align-items-center">
+                                <HandshakeIcon fontSize="inherit" sx={{ color: '#0070f3', fontSize: 80 }} />
+                                <Typography fontWeight="bold" align="center">
+                                    Chọn máy ảnh<br />phù hợp nhất
+                                </Typography>
+                            </Box>
+                            <Box className="d-flex flex-column align-items-center">
+                                <CameraAltIcon fontSize="inherit" sx={{ color: '#0070f3', fontSize: 80 }} />
+                                <Typography fontWeight="bold" align="center">
+                                    Đặt trước máy<br />ảnh
+                                </Typography>
+                            </Box>
+                        </Box>
+                        {/*element2*/}
+                        <Button variant="contained" size="large" fullWidth
+                                sx={{ mb: 2,  color: "white", backgroundColor: "#0070f3", "&:hover": { color: "white", backgroundColor: "black" } }}>
+                            Thuê máy ảnh ngay
+                        </Button>
+                    </Box>
+                </Box>
+            </Box>
+            <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center'}}>
+                <Typography variant="subtitle1" className="fs-3 fw-bold">Các thương hiệu máy ảnh</Typography>
+            </Box>
+            {/*list cart*/}
+            <Box className="d-flex justify-content-around align-items-center my-5 flex-wrap">
+                {categories1.map((category, index) => (
+                    <CardCategories
+                        key={index}
+                        image={category.image}
+                        title={category.title}
+                        url={category.url}
+                    />
+                ))}
+            </Box>
+            <Box className="d-flex justify-content-around align-items-center my-5 flex-wrap">
+                {categories2.map((category, index) => (
+                    <CardCategories
+                        key={index}
+                        image={category.image}
+                        title={category.title}
+                        url={category.url}
+                    />
+                ))}
+            </Box>
+            <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center'}}>
+                <Typography variant="subtitle1" className="fs-3 fw-bold">Một số máy ảnh</Typography>
+            </Box>
+            <Box className="p-4 row justify-content-between gap-5">
+                <CardProduct product={product} />
+                <CardProduct product={product} />
+                <CardProduct product={product} />
+                <CardProduct product={product} />
+                <CardProduct product={product} />
+                <CardProduct product={product} />
+                <CardProduct product={product} />
+                <CardProduct product={product} />
+            </Box>
 
-                                </div>
-                                <div className="col">
-                                    <p>Chọn máy ảnh phù hợp nhất</p>
-                                    <img src={shake} alt="Logo" width="30" height="30" className="d-inline-block align-top" />
-                                </div>
-                                <div className="col">
-                                    <p>Đặt trước máy ảnh</p>
-                                    <div className="py-3"></div>
-                                    <img src={cam} alt="Logo" width="30" height="30" className="d-inline-block align-top" />
-                                </div>
-                            </div>
-                            <div className="d-flex justify-content-center">
-                                <button className="btn btn-primary mt-3 ">Đặt trước máy ảnh hoàn hảo của bạn</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Featured Cameras */}
-            <div className="container my-5">
-                <h4 className="text-center mb-4 text-primary">Sản phẩm của chúng tôi</h4>
-                <h4 className="text-center mb-4 text-primary">Sản phẩm của chúng tôi</h4>
-                <h4 className="text-center mb-4 text-primary">Sản phẩm của chúng tôi</h4>
-                <h2 className="text-center mb-4">Máy Ảnh Nổi Bật</h2>
-                <div className="row">
-                    {[1, 2, 3].map((item) => (
-                        <div className="col-md-4 mb-4" key={item}>
-                            <div className="card h-100">
-                                <img src={cam1} className="card-img-top" alt="Canon EOS R5" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Canon EOS R5</h5>
-                                    <p className="card-text">Canon</p>
-                                    <p className="fw-bold">500.000đ/ngày</p>
-                                    <button className="btn btn-success w-100" onClick={() => navigate('/cart')}>Thuê ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <div className="row">
-                    {[1, 2, 3].map((item) => (
-                        <div className="col-md-4 mb-4" key={item}>
-                            <div className="card h-100">
-                                <img src={cam2} className="card-img-top" alt="Canon EOS R5" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Canon EOS R5</h5>
-                                    <p className="card-text">Canon</p>
-                                    <p className="fw-bold">500.000đ/ngày</p>
-                                    <button className="btn btn-success w-100">Thuê ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <div className="row">
-                    {[1, 2, 3].map((item) => (
-                        <div className="col-md-4 mb-4" key={item}>
-                            <div className="card h-100">
-                                <img src={cam3} className="card-img-top" alt="Canon EOS R5" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Canon EOS R5</h5>
-                                    <p className="card-text">Canon</p>
-                                    <p className="fw-bold">500.000đ/ngày</p>
-                                    <button className="btn btn-success w-100">Thuê ngay</button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Footer*/}
-            {/* Footer */}
-            <footer className="bg-light pt-5 pb-3 mt-5 border-top">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-3 mb-3">
-                            <h5 className="fw-bold">EagleCam</h5>
-                            <p>Giải pháp thuê máy ảnh tiện lợi và nhanh chóng cho mọi nhiếp ảnh gia.</p>
-                        </div>
-                        <div className="col-md-3 mb-3">
-                            <h6 className="fw-bold">Dịch vụ</h6>
-                            <ul className="list-unstyled">
-                                <li><a href="#" className="text-decoration-none text-dark">Thuê máy ảnh</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Phụ kiện</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Combo khuyến mãi</a></li>
-                            </ul>
-                        </div>
-                        <div className="col-md-3 mb-3">
-                            <h6 className="fw-bold">Hỗ trợ</h6>
-                            <ul className="list-unstyled">
-                                <li><a href="#" className="text-decoration-none text-dark">Câu hỏi thường gặp</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Hướng dẫn sử dụng</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Chính sách bảo mật</a></li>
-                            </ul>
-                        </div>
-                        <div className="col-md-3 mb-3">
-                            <h6 className="fw-bold">Liên hệ</h6>
-                            <p>Email: support@eaglecam.vn</p>
-                            <p>Hotline: 1900 123 456</p>
-                            <p>Địa chỉ: 123 Nguyễn Văn Cừ, TP.HCM</p>
-                        </div>
-                    </div>
-                    <div className="text-center mt-4 text-muted">
-                        &copy; {new Date().getFullYear()} EagleCam. All rights reserved.
-                    </div>
-                </div>
-            </footer>
-        </div>
+            {/*Footer*/}
+            <Footer />
+        </Box>
     );
 };
 
 export default HomePage;
+
