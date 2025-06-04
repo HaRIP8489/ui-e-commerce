@@ -19,9 +19,10 @@ const UserRentalHistoryPage = lazy(() => import("../pages/UserRentalHistoryPage"
 const ResetPasswordPage = lazy(() => import("../pages/ResetPasswordPage"));
 const PaymentPage = lazy(() => import("../pages/PaymentPage"));
 const CheckoutPage = lazy(() => import("../pages/CheckoutPage"));
-
-
-
+const UserProfilePage = lazy(() => import("../pages/UserProfilePage"));
+const ProductManagementPage = lazy(() => import("../pages/ProductManagementPage"));
+const AdminDashboardPage = lazy(() => import("../pages/AdminDashboardPage"));
+const ProductDetailPage = lazy(() => import("../pages/ProductDetailPage"));
 
 
 
@@ -47,6 +48,11 @@ function AppRouter() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/user-profile" element={<UserProfilePage />} />
+          <Route path="/product-management" element={<ProductManagementPage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+
           {/* Đường dẫn mặc định */}
           
           <Route path="/" element={<Home />} />
