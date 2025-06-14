@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import {Box, Container, Stack, Typography} from "@mui/material";
-import about from "../assets/images/about.jpg";
+import about from "../../assets/images/about.jpg";
 
 
 const AboutPage: React.FC = () => {

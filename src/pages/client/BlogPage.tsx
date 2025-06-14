@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import cam2 from "../assets/images/cam2.jpg"
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import cam2 from "../../assets/images/cam2.jpg"
 import {Box, Button} from "@mui/material";
 
 const blogPosts = [

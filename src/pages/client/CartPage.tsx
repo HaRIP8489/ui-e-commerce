@@ -1,10 +1,10 @@
 import React from 'react';
 import {Box, Typography, TextField, Button, List, ListItem, ListItemText, Container,} from '@mui/material';
-import CartItem from '../components/CartItem';
-import CartSummary from '../components/CartSummary';
-import cam from '../assets/images/cam1.jpg'
-import  Header from '../components/Header';
-import Footer from '../components/Footer';
+import CartItem from '../../components/CartItem';
+import CartSummary from '../../components/CartSummary';
+import cam from '../../assets/images/cam1.jpg'
+import  Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 
 const cartItems = [

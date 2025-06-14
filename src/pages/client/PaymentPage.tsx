@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Card, Form, Button } from "react-bootstrap";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const PaymentPage = () => {
   const [paymentInfo, setPaymentInfo] = useState({

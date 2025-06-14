@@ -1,6 +1,6 @@
 import { Container, Table, Button } from "react-bootstrap";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const ProductManagementPage = () => {
   return (

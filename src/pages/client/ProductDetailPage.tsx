@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import img from '../../assets/images/cam1.jpg';
 
 const ProductDetailPage = () => {
   return (
@@ -12,7 +13,7 @@ const ProductDetailPage = () => {
             <Card className="shadow-sm">
               <Card.Img
                 variant="top"
-                src="https://via.placeholder.com/500x300?text=Hình+ảnh+máy+ảnh"
+                src={img}
               />
             </Card>
           </Col>

@@ -19,7 +19,7 @@ const HeaderMenu = () => {
                 <Box display="flex" alignItems="center" columnGap={10}>
                     <Box display="flex" alignItems="center" columnGap={4} fontSize={"18px"} fontWeight={500} >
                         <Link component={RouterLink} className={`pb-1 text-black text-decoration-none ${pathName === "" ? "border-3 border-bottom border-black" : "border-3"}`} to="/">Trang chủ</Link>
-                        <Link component={RouterLink} className={`pb-1 text-black text-decoration-none ${pathName === "shop" ? "border-3 border-bottom border-black" : "border-3"}`} to="/shop">Cửa hàng</Link>
+                        <Link component={RouterLink} className={`pb-1 text-black text-decoration-none ${pathName === "shop" ? "border-3 border-bottom border-black" : "border-3"}`} to="/shop">Sản phẩm</Link>
                         <Link component={RouterLink} className={`pb-1 text-black text-decoration-none ${pathName === "blog" ? "border-3 border-bottom border-black" : "border-3"}`} to="/blog">Blog</Link>
                         <Link component={RouterLink} className={`pb-1 text-black text-decoration-none ${pathName === "about" ? "border-3 border-bottom border-black" : "border-3"}`} to="/about">Giới thiệu</Link>
                         <Link component={RouterLink} className={`pb-1 text-black text-decoration-none ${pathName === "contact" ? "border-3 border-bottom border-black" : "border-3"}`} to="/contact">Liên hệ</Link>

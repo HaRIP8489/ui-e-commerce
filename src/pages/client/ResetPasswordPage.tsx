@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Card, Typography, TextField, Button } from '@mui/material';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const ResetPasswordPage = () => {
   const [email, setEmail] = useState('');

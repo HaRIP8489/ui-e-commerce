@@ -48,8 +48,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Typography, Card, Table, TableHead, TableRow, TableCell, TableBody, Chip } from '@mui/material';
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const MyRentalsPage = () => {
  return (

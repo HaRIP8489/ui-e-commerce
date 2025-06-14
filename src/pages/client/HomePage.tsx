@@ -1,22 +1,22 @@
 import React, {useRef, useState} from 'react';
-import Header from "../components/Header"
-import camera from  "../assets/images/Camera.png";
-import cam1 from  "../assets/images/cam1.jpg";
+import Header from "../../components/Header"
+import camera from "../../assets/images/Camera.png";
+import cam1 from "../../assets/images/cam1.jpg";
 import {Box, Button, TextField, Typography} from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CardCategories    from "../common/CardCategories";
-import Canon from "../assets/images/canon.webp";
-import Nikon from "../assets/images/nikon.png";
-import Sony from "../assets/images/sony.png";
-import Fujifilm from "../assets/images/fujifilm.jpg";
-import Panasonic from "../assets/images/panasonic.jpg";
-import Olympus from "../assets/images/olympus.jpg";
-import Leica from "../assets/images/leica.png";
-import PhaseOne from "../assets/images/phaseone.jpg";
-import Footer from "../components/Footer";
-import CardProduct from "../common/CardProduct";
+import CardCategories    from "../../common/CardCategories";
+import Canon from "../../assets/images/canon.webp";
+import Nikon from "../../assets/images/nikon.png";
+import Sony from "../../assets/images/sony.png";
+import Fujifilm from "../../assets/images/fujifilm.jpg";
+import Panasonic from "../../assets/images/panasonic.jpg";
+import Olympus from "../../assets/images/olympus.jpg";
+import Leica from "../../assets/images/leica.png";
+import PhaseOne from "../../assets/images/phaseone.jpg";
+import Footer from "../../components/Footer";
+import CardProduct from "../../common/CardProduct";
 
 const categories1 = [
     { image: Canon, title: "Canon", url: "Canon" },
@@ -130,7 +130,7 @@ const HomePage: React.FC = () => {
                 ))}
             </Box>
             <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center'}}>
-                <Typography variant="subtitle1" className="fs-3 fw-bold">Một số máy ảnh</Typography>
+                <Typography variant="subtitle1" className="fs-3 fw-bold">Một số máy ảnh nổi bật</Typography>
             </Box>
             <Box className="p-4 row justify-content-between gap-5">
                 <CardProduct product={product} />

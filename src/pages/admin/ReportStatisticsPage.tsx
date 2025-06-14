@@ -1,8 +1,8 @@
 
 import { Container, Row, Col } from 'react-bootstrap';
 import { Card, Typography, TextField, Button, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const ReportStatisticsPage = () => {
   return (
