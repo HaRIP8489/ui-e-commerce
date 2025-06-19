@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import cam2 from "../../assets/images/cam2.jpg"
-import {Box, Button} from "@mui/material";
+import cam2 from "../../assets/images/cam2.jpg";
+import { Box, Button } from "@mui/material";
 
 const blogPosts = [
   {
@@ -37,7 +37,9 @@ const BlogPage: React.FC = () => {
       <Header />
       <div className="container py-5">
         <h1 className="text-center fw-bold mb-4">Tin Tức & Blog</h1>
-        <p className="text-center text-muted mb-5">Cập nhật thông tin, mẹo vặt và đánh giá thiết bị từ EagleCam.</p>
+        <p className="text-center text-muted mb-5">
+          Cập nhật thông tin, mẹo vặt và đánh giá thiết bị từ EagleCam.
+        </p>
 
         <div className="row">
           {blogPosts.map((post) => (
@@ -46,12 +48,23 @@ const BlogPage: React.FC = () => {
                 <img src={post.image} className="card-img-top" alt={post.title} />
                 <div className="card-body">
                   <h5 className="card-title fw-bold">{post.title}</h5>
-                  <p className="text-muted small mb-1">{post.date} • {post.author}</p>
+                  <p className="text-muted small mb-1">
+                    {post.date} • {post.author}
+                  </p>
                   <p className="card-text">{post.excerpt}</p>
                 </div>
                 <div className="card-footer bg-transparent border-top-0">
-                  <Button variant="contained" size="large" fullWidth
-                          sx={{  mt: 1,  color: "white", backgroundColor: "black", "&:hover": { backgroundColor: "#0070f3" } }}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    fullWidth
+                    sx={{
+                      mt: 1,
+                      color: "white",
+                      backgroundColor: "black",
+                      "&:hover": { backgroundColor: "#0070f3" }
+                    }}
+                  >
                     Gửi tin nhắn
                   </Button>
                 </div>
@@ -61,7 +74,7 @@ const BlogPage: React.FC = () => {
         </div>
       </div>
 
-       <Footer /> 
+      <Footer />
     </Box>
   );
 };
