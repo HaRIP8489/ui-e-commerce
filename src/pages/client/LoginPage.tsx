@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (email === 'admin@camerarent.com' && password === '123456') {
       alert('🎉 Đăng nhập thành công!');
+      localStorage.setItem('isLoggedIn', 'true'); // Lưu trạng thái đăng nhập
+      navigate('/'); // Chuyển hướng về trang chủ
     } else {
       setError('Sai email hoặc mật khẩu');
     }
