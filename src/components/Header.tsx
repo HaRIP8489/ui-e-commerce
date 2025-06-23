@@ -10,7 +10,7 @@ import { useUser } from "../context/UserContext";
 
 const NAV_LINKS = [
     { to: "/home", label: "Trang chủ", match: "home" },
-    { to: "/productDetails", label: "Sản phẩm", match: "productDetails", icon: <KeyboardArrowDownIcon fontSize="small" /> },
+    { to: "/shop", label: "Sản phẩm", match: "shop", icon: <KeyboardArrowDownIcon fontSize="small" /> },
     { to: "/blog", label: "Blog", match: "blog" },
     { to: "/about", label: "Giới thiệu", match: "about" },
     { to: "/contact", label: "Liên hệ", match: "contact" },

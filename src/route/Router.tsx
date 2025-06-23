@@ -24,6 +24,11 @@ const UserProfilePage = lazy(() => import("../pages/client/UserProfilePage"));
 const ProductManagementPage = lazy(() => import("../pages/admin/ProductManagementPage"));
 const AdminDashboardPage = lazy(() => import("../pages/admin/AdminDashboardPage"));
 const ProductDetailPage = lazy(() => import("../pages/client/ProductDetailPage"));
+const OrderDetailPage = lazy(() => import("../pages/client//OrderDetailPage"));
+const CameraOwnerManagementPage = lazy(() => import("../pages/admin/CameraOwnerManagementPage"));
+const FeedbackPage = lazy(() => import("../pages/admin/FeedbackPage"));
+const OrderManagementPage = lazy(() => import("../pages/admin/OrderManagementPage"));
+const UserManagementPage = lazy(() => import("../pages/admin/UserManagementPage"));
 
 
 
@@ -54,6 +59,11 @@ function AppRouter() {
           <Route path="/admin/product-management" element={<ProductManagementPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/order-detail" element={<OrderDetailPage />} />
+          <Route path="/manage-own-cam" element={<CameraOwnerManagementPage />} />
+          <Route path="/manage-feedback" element={<FeedbackPage />} />
+          <Route path="/manage-order" element={<OrderManagementPage />} />
+          <Route path="/manage-user" element={<UserManagementPage />} />
 
           {/* Đường dẫn mặc định */}
           
