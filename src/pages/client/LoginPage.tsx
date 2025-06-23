@@ -1,25 +1,15 @@
 import React from "react";
-import {
-    Box,
-    Button,
-    Container,
-    Link,
-    Stack,
-    Typography,
-    Snackbar,
-    Alert,
-    CircularProgress,
-    FormControlLabel,
-    Checkbox,
-} from "@mui/material";
+import {Box, Button, Container, Link, Stack, Typography, Snackbar, Alert, CircularProgress, FormControlLabel, Checkbox,} from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import CTextField from "../../common/CTextField";
 import CTextFieldIcon from "../../common/CTextFieldIcon";
+import { useUser } from "../../context/UserContext";
+import ImageNoData from "../../assets/images/no-avt.jpg";
 
-// Schema Yup validate mạnh mẽ
+// Schema Yup validate
 const LoginSchema = Yup.object().shape({
     username: Yup.string()
         .required("Vui lòng nhập tên đăng nhập"),
@@ -29,13 +19,14 @@ const LoginSchema = Yup.object().shape({
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
+    const { setUser, fetchUser } = useUser();
     const [notify, setNotify] = React.useState<{
         open: boolean;
         type: "success" | "error";
         message: string;
     }>({ open: false, type: "success", message: "" });
 
-    // Dùng Formik quản lý form, state, validate
+    // Formik quản lý form, state, validate
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -45,7 +36,7 @@ const LoginPage: React.FC = () => {
         validationSchema: LoginSchema,
         onSubmit: async (values, { setSubmitting }) => {
             try {
-                // Gọi API thực tế của bạn!
+
                 const res = await axios.post("http://localhost:8080/api/auth/login", {
                     username: values.username,
                     password: values.password,
@@ -54,10 +45,15 @@ const LoginPage: React.FC = () => {
                 // Lưu token an toàn (tùy yêu cầu: localStorage, cookie, context...)
                 localStorage.setItem("accessToken", res.data.accessToken);
 
+                setUser({
+                    username: values.username,
+                    profile: {profilePicture: ImageNoData},
+                });
+
                 setNotify({
                     open: true,
                     type: "success",
-                    message: "Đăng nhập thành công! Đang chuyển trang...",
+                    message: "Đăng nhập thành công!",
                 });
 
                 setTimeout(() => {
