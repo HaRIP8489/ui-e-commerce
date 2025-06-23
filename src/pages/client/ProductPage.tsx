@@ -1,7 +1,10 @@
 import React from "react";
-import {Box, Grid, Typography, TextField, Button} from "@mui/material";
+import { Box, Typography, TextField, Button } from "@mui/material";
 import ProductCard from "../../components/ProductCard";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
+// Danh sách sản phẩm mẫu
 const products = [
     {
         name: "Sony FX3 Full-Frame Cinema Camera",
@@ -24,55 +27,77 @@ const products = [
         type: "Máy ảnh",
         rating: 5
     },
-    // Thêm sản phẩm khác
+    // Có thể thêm sản phẩm khác ở đây
 ];
 
 const ProductPage = () => {
     return (
-        <Box sx={{ padding: 4, maxWidth: 1200, margin: "auto" }}>
-            <Typography
-                variant="h4"
-                align="center"
-                gutterBottom
-                sx={{ fontWeight: "bold", textDecoration: "underline" }}
-            >
-                Cửa hàng
-            </Typography>
+        <Box sx={{ backgroundColor: "#f3f4f6" }}>
+            <Header />
 
-            <TextField
-                fullWidth
-                placeholder="Nhập từ khóa vào đây ..."
-                variant="outlined"
-                sx={{ mb: 4 }}
-            />
+            <Box sx={{ px: 5, py: 4, maxWidth: "1200px", margin: "auto" }}>
+                {/* Tiêu đề */}
+                <Typography
+                    variant="h4"
+                    align="center"
+                    gutterBottom
+                    sx={{ fontWeight: "bold", color: "#0070f3", mb: 4 }}
+                >
+                    Sản phẩm
+                </Typography>
 
-            <Box
-                sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 3,
-                    justifyContent: "center",
-                }}
-            >
-                {products.map((product, index) => (
-                    <Box
-                        key={index}
+                {/* Thanh tìm kiếm */}
+                <TextField
+                    fullWidth
+                    placeholder="Tìm kiếm sản phẩm..."
+                    variant="outlined"
+                    sx={{ mb: 4, backgroundColor: "white", borderRadius: 1 }}
+                />
+
+                {/* Danh sách sản phẩm */}
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 3,
+                        justifyContent: "center",
+                    }}
+                >
+                    {products.map((product, index) => (
+                        <Box
+                            key={index}
+                            sx={{
+                                width: {
+                                    xs: "100%",
+                                    sm: "calc(50% - 12px)",
+                                    md: "calc(33.333% - 16px)",
+                                },
+                            }}
+                        >
+                            <ProductCard product={product} />
+                        </Box>
+                    ))}
+                </Box>
+
+                {/* Nút tải thêm */}
+                <Box textAlign="center" mt={6}>
+                    <Button
+                        variant="outlined"
                         sx={{
-                            width: {
-                                xs: "100%",     // full width on small screens
-                                sm: "calc(50% - 12px)", // 2 columns with gap
-                                md: "calc(33.333% - 16px)", // 3 columns with gap
-                            },
+                            borderColor: "#0070f3",
+                            color: "#0070f3",
+                            "&:hover": {
+                                backgroundColor: "#0070f3",
+                                color: "white"
+                            }
                         }}
                     >
-                        <ProductCard product={product} />
-                    </Box>
-                ))}
+                        Tải thêm ...
+                    </Button>
+                </Box>
             </Box>
 
-            <Box textAlign="center" mt={4}>
-                <Button variant="outlined">Tải thêm ...</Button>
-            </Box>
+            <Footer />
         </Box>
     );
 };

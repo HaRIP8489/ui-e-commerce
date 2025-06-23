@@ -12,60 +12,56 @@ interface CartItemProps {
     image: string;
   };
   onDelete?: (id: number) => void;
+  onQuantityChange?: (id: number, newQuantity: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, onDelete }) => {
+const CartItem: React.FC<CartItemProps> = ({ item, onDelete, onQuantityChange }) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
-  const handleIncrease = () => {
-    setQuantity(prev => prev + 1);
-  };
-
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      setQuantity(prev => prev - 1);
-    }
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    onQuantityChange?.(item.id, newQuantity);
   };
 
   const handleRemove = () => {
-    console.log('Xóa sản phẩm:', item.id);
+    onDelete?.(item.id);
   };
 
   return (
-    <Box
-      display="flex"
-      gap={2}
-      py={2}
-      borderBottom="1px solid #ccc"
-      position="relative"
-    >
-      <Avatar
-        src={item.image}
-        alt={item.name}
-        variant="rounded"
-        sx={{ width: 96, height: 96 }}
-      />
-
-      <Box flex={1}>
-        <Typography variant="h6" sx={{ fontSize: '1.25rem', fontWeight: 600 }}>
-          {item.name}
-        </Typography>
-        <Typography color="text.secondary" sx={{ fontSize: '1.25rem' }}>
-          {item.price.toLocaleString('vi-VN')} đ/ngày
-        </Typography>
-
-        <Box display="flex" alignItems="center" mt={1} gap={1}>
-          <SelectQuantity quantity={quantity} onChange={setQuantity}/>
-        </Box>
-      </Box>
-
-      <IconButton
-          sx={{ color: 'black', '&:hover': { color: 'error.main' } }}
-          onClick={() => onDelete?.(item.id)}
+      <Box
+          display="flex"
+          gap={2}
+          py={2}
+          borderBottom="1px solid #ccc"
+          position="relative"
       >
-        <DeleteIcon />
-      </IconButton>
-    </Box>
+        <Avatar
+            src={item.image}
+            alt={item.name}
+            variant="rounded"
+            sx={{ width: 96, height: 96 }}
+        />
+
+        <Box flex={1}>
+          <Typography variant="h6" sx={{ fontSize: '1.25rem', fontWeight: 600 }}>
+            {item.name}
+          </Typography>
+          <Typography color="text.secondary" sx={{ fontSize: '1.25rem' }}>
+            {item.price.toLocaleString('vi-VN')} đ/ngày
+          </Typography>
+
+          <Box display="flex" alignItems="center" mt={1} gap={1}>
+            <SelectQuantity quantity={quantity} onChange={handleQuantityChange} />
+          </Box>
+        </Box>
+
+        <IconButton
+            sx={{ color: 'black', '&:hover': { color: 'error.main' } }}
+            onClick={handleRemove}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Box>
   );
 };
 
