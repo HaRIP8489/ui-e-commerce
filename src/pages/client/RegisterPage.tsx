@@ -48,7 +48,7 @@ const RegisterPage: React.FC = () => {
                     password: values.password,
                     confirmPassword: values.confirmPassword,
                 });
-                setNotify({ open: true, type: "success", message: "Đăng ký thành công! Đang chuyển sang trang đăng nhập..." });
+                setNotify({ open: true, type: "success", message: "Đăng ký thành công!" });
                 setTimeout(() => {
                     navigate("/login");
                 }, 1600);
