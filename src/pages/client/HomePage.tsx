@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
-import Header from "../../components/Header"
+import React, { useEffect, useState } from 'react';
+import Header from "../../components/Header";
 import camera from "../../assets/images/Camera.png";
-import cam1 from "../../assets/images/cam1.jpg";
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -16,27 +15,56 @@ import Olympus from "../../assets/images/olympus.jpg";
 import Leica from "../../assets/images/leica.png";
 import PhaseOne from "../../assets/images/phaseone.jpg";
 import Footer from "../../components/Footer";
-import CardProduct from "../../common/CardProduct";
-import { useNavigate, Link } from 'react-router-dom';
+import CCardProduct from "../../common/CardProduct";
+import { useNavigate } from 'react-router-dom';
+import { getAllProducts } from "../../api/products";
+import cam1 from "../../assets/images/cam1.jpg"; // Ảnh mặc định
 
 const categories1 = [
     { image: Canon, title: "Canon", url: "Canon" },
     { image: Nikon, title: "Nikon", url: "Nikon" },
-    { image: Sony, title: " Sony", url: " Sony" },
+    { image: Sony, title: "Sony", url: "Sony" },
     { image: Fujifilm, title: "Fujifilm", url: "Fujifilm" },
-]
+];
 
 const categories2 = [
     { image: Panasonic, title: "Panasonic", url: "Panasonic" },
     { image: Olympus, title: "Olympus", url: "Olympus" },
     { image: Leica, title: "Leica", url: "Leica" },
     { image: PhaseOne, title: "PhaseOne", url: "PhaseOne" },
-]
+];
 
-const product = { image: cam1, title: "X-S20", price: "1.500.000", discount: "10%", priceDiscount: "1.350.000", quantitySold: "107" }
+interface Product {
+    id: number | string;
+    name: string;
+    pricePerDay: number;
+    soldCount: number;
+    image?: string;
+}
 
 const HomePage: React.FC = () => {
     const navigate = useNavigate();
+    const [highlightProducts, setHighlightProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        // Lấy 8 sản phẩm nổi bật từ API (hoặc bạn có thể lọc sản phẩm nổi bật theo trường riêng nếu có)
+        const fetchProducts = async () => {
+            try {
+                const data = await getAllProducts();
+                // Map ảnh mặc định nếu BE chưa có trường image
+                const mapped = data.slice(0, 8).map((item: any) => ({
+                    ...item,
+                    image: cam1,
+                }));
+                setHighlightProducts(mapped);
+            } catch (error) {
+                setHighlightProducts([]);
+            }
+            setLoading(false);
+        };
+        fetchProducts();
+    }, []);
 
     return (
         <Box sx={{ px: 5, py: 3, backgroundColor: '#D0D5DD' }}>
@@ -146,7 +174,6 @@ const HomePage: React.FC = () => {
                                 </Typography>
                             </Box>
                         </Box>
-
                         {/* Nút chuyển đến giỏ hàng hoặc login */}
                         <Button
                             variant="contained"
@@ -193,16 +220,22 @@ const HomePage: React.FC = () => {
             <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
                 <Typography variant="subtitle1" className="fs-3 fw-bold">Một số máy ảnh nổi bật</Typography>
             </Box>
-            <Box className="p-4 row justify-content-between gap-5">
-                <CardProduct product={product} />
-                <CardProduct product={product} />
-                <CardProduct product={product} />
-                <CardProduct product={product} />
-                <CardProduct product={product} />
-                <CardProduct product={product} />
-                <CardProduct product={product} />
-                <CardProduct product={product} />
+            <Box className="p-4 row justify-content-center">
+                {loading ? (
+                    <Box width="100%" display="flex" justifyContent="center" alignItems="center" minHeight={200}>
+                        <CircularProgress />
+                    </Box>
+                ) : highlightProducts.length === 0 ? (
+                    <Typography>Không có sản phẩm nổi bật</Typography>
+                ) : (
+                    highlightProducts.map(product => (
+                        <div key={product.id} className="col-12 col-sm-6 col-md-4 mb-4 d-flex justify-content-center">
+                            <CCardProduct product={product} />
+                        </div>
+                    ))
+                )}
             </Box>
+
 
             {/* Footer */}
             <Footer />
