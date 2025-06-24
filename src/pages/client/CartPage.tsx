@@ -35,23 +35,35 @@ const CartPage: React.FC = () => {
 
     // Lấy giỏ hàng từ BE
     useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            setCartItems([]);
+            setError('Bạn cần đăng nhập để xem giỏ hàng.');
+            setLoading(false);
+            return;
+        }
+
         const fetchCart = async () => {
             try {
                 setLoading(true);
                 setError('');
-                const accessToken = localStorage.getItem('accessToken');
                 const res = await axios.get('http://localhost:8080/api/cart', {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
-                // Giả sử API trả về mảng cart items trực tiếp. Nếu là res.data.cartItems thì đổi lại cho đúng.
                 setCartItems(res.data);
-            } catch (err) {
-                setError('Không thể tải giỏ hàng. Vui lòng đăng nhập hoặc thử lại.');
+            } catch (err: any) {
+                if (err?.response?.status === 401) {
+                    setCartItems([]);
+                    setError('Bạn cần đăng nhập để xem giỏ hàng.');
+                } else {
+                    setError('Không thể tải giỏ hàng. Vui lòng thử lại.');
+                }
             }
             setLoading(false);
         };
         fetchCart();
     }, []);
+
 
     // Xóa sản phẩm khỏi giỏ hàng (FE và BE)
     const handleDelete = async (id: number) => {
