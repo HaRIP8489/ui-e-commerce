@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, List, ListItem, ListItemText, Container } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, TextField, Button, List, ListItem, ListItemText, Container, CircularProgress, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CartItem from '../../components/CartItem';
 import CartSummary from '../../components/CartSummary';
-import cam from '../../assets/images/cam1.jpg';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import axios from 'axios';
 
 const purchasePolicy = [
     'Sản phẩm được đổi 1 lần duy nhất, không hỗ trợ trả.',
@@ -14,43 +14,105 @@ const purchasePolicy = [
     'Sản phẩm sale chỉ hỗ trợ đổi size (nếu cửa hàng còn) trong 7 ngày trên toàn hệ thống.',
 ];
 
-const CartPage: React.FC = () => {
-    const [cartItems, setCartItems] = useState([
-        {
-            id: 1,
-            name: 'Body canon EOS 5D Mark IV',
-            price: 450000,
-            quantity: 1,
-            image: cam,
-        },
-        {
-            id: 2,
-            name: 'Body máy ảnh Sony A6400',
-            price: 500000,
-            quantity: 1,
-            image: cam,
-        },
-    ]);
+// Định nghĩa interface đúng với BE trả về
+interface CartItemData {
+    id: number;
+    productId: number;
+    productName: string;
+    pricePerDay: number;
+    quantity: number;
+    image?: string;
+    rentStart?: string;
+    rentEnd?: string;
+}
 
+const CartPage: React.FC = () => {
+    const [cartItems, setCartItems] = useState<CartItemData[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+    const [note, setNote] = useState('');
     const navigate = useNavigate();
 
-    const handleDelete = (id: number) => {
-        setCartItems(prev => prev.filter(item => item.id !== id));
+    // Lấy giỏ hàng từ BE
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                setLoading(true);
+                setError('');
+                const accessToken = localStorage.getItem('accessToken');
+                const res = await axios.get('http://localhost:8080/api/cart', {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                });
+                // Giả sử API trả về mảng cart items trực tiếp. Nếu là res.data.cartItems thì đổi lại cho đúng.
+                setCartItems(res.data);
+            } catch (err) {
+                setError('Không thể tải giỏ hàng. Vui lòng đăng nhập hoặc thử lại.');
+            }
+            setLoading(false);
+        };
+        fetchCart();
+    }, []);
+
+    // Xóa sản phẩm khỏi giỏ hàng (FE và BE)
+    const handleDelete = async (id: number) => {
+        try {
+            const accessToken = localStorage.getItem('accessToken');
+            await axios.delete(`http://localhost:8080/api/cart/${id}`, {
+                headers: { Authorization: `Bearer ${accessToken}` }
+            });
+            setCartItems(prev => prev.filter(item => item.id !== id));
+        } catch (err) {
+            alert('Không thể xóa sản phẩm. Vui lòng thử lại.');
+        }
     };
 
-    const handleQuantityChange = (id: number, quantity: number) => {
-        setCartItems(prev =>
-            prev.map(item => (item.id === id ? { ...item, quantity } : item))
-        );
+    // Cập nhật số lượng sản phẩm trong giỏ hàng (FE và BE)
+    const handleQuantityChange = async (id: number, quantity: number) => {
+        try {
+            const accessToken = localStorage.getItem('accessToken');
+            await axios.put(`http://localhost:8080/api/cart/${id}`, { quantity }, {
+                headers: { Authorization: `Bearer ${accessToken}` }
+            });
+            setCartItems(prev =>
+                prev.map(item => (item.id === id ? { ...item, quantity } : item))
+            );
+        } catch (err) {
+            alert('Không thể cập nhật số lượng. Vui lòng thử lại.');
+        }
     };
 
     const handleCheckout = () => {
-        navigate('/checkout');
+        // Bạn có thể truyền note sang trang thanh toán nếu cần
+        navigate('/checkout', { state: { note } });
     };
 
     const handleContinueShopping = () => {
         navigate('/shop');
     };
+
+    // Loading và Error UI
+    if (loading) {
+        return (
+            <>
+                <Header />
+                <Container maxWidth="lg" sx={{ minHeight: 350, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <CircularProgress />
+                </Container>
+                <Footer />
+            </>
+        );
+    }
+    if (error) {
+        return (
+            <>
+                <Header />
+                <Container maxWidth="lg" sx={{ minHeight: 350, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Alert severity="error">{error}</Alert>
+                </Container>
+                <Footer />
+            </>
+        );
+    }
 
     return (
         <Box sx={{ px: 5, py: 3, backgroundColor: '#D0D5DD' }}>
@@ -95,6 +157,8 @@ const CartPage: React.FC = () => {
                                     placeholder="Ghi chú"
                                     variant="outlined"
                                     sx={{ bgcolor: '#f0f0f0', borderRadius: 1 }}
+                                    value={note}
+                                    onChange={e => setNote(e.target.value)}
                                 />
                             </Box>
                         </Box>
@@ -107,6 +171,7 @@ const CartPage: React.FC = () => {
                                     fullWidth
                                     sx={{ mt: 3, bgcolor: '#E20000', '&:hover': { bgcolor: '#b70000' }, py: 1.5, fontWeight: 600 }}
                                     onClick={handleCheckout}
+                                    disabled={cartItems.length === 0}
                                 >
                                     Thanh toán
                                 </Button>

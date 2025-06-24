@@ -107,9 +107,6 @@ const Header: React.FC = () => {
                         </Box>
                     ) : (
                         <Box display="flex" alignItems="center" columnGap={2}>
-                            <IconButton>
-                                <ShoppingCart />
-                            </IconButton>
                             <Box
                                 ref={anchorRef}
                                 sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
