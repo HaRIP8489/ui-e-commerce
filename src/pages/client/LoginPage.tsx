@@ -168,7 +168,7 @@ const LoginPage: React.FC = () => {
                                 <Typography variant="body2">
                                     Chưa có tài khoản?{" "}
                                     <RouterLink
-                                        to="/auth/register"
+                                        to="/register"
                                         style={{ color: "#0070f3", fontWeight: "bold" }}
                                     >
                                         Đăng ký ngay
